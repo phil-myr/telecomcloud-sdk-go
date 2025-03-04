@@ -97,13 +97,19 @@ func (s *orderClient) PlaceRefundOrder(ctx context.Context, req *order.PlaceRefu
 
 func (s *orderClient) QueryResourceInfoByMasterOrderId(ctx context.Context, req *order.QueryResourceInfoByMasterOrderIdRequest, reqOpt ...config.RequestOption) (resp *order.QueryResourceInfoByMasterOrderIdResponse, rawResponse *protocol.Response, err error) {
 	openapiResp := &openapi.OpenapiResponse{}
-	openapiResp.ReturnObj = &resp
+	resp = &order.QueryResourceInfoByMasterOrderIdResponse{
+		ResourceInfo: make([]*order.ResourceInfo, 0),
+	}
+	openapiResp.ReturnObj = &resp.ResourceInfo
 	ret, err := s.client.R().
 		SetContext(ctx).
+		AddHeaders(map[string]string{
+			"masterOrderId": req.GetMasterOrderId(),
+		}).
 		SetBodyParam(req).
 		SetRequestOption(reqOpt...).
 		SetResult(openapiResp).
-		Execute(http.MethodPost, "/v3/order/queryResourceInfoByMasterOrderId")
+		Execute(http.MethodGet, "/v3/order/queryResourceInfoByMasterOrderId")
 	if err != nil {
 		return nil, nil, err
 	}
