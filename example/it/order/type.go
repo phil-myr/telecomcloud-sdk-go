@@ -4,34 +4,35 @@ import "encoding/json"
 
 type Order struct {
 	AutoPay    bool        `json:"autoPay"`
+	Source     string      `json:"source"`
 	Orders     []OrderItem `json:"orders"`
 	CustomInfo CustomInfo  `json:"customerId"`
 }
 
 type CustomInfo struct {
 	Phone    string   `json:"phone,omitempty"`
-	Identity Identity `json:"identity,omitempty"`
-	Type     int      `json:"type,omitempty"`
+	Identity Identity `json:"identity"`
+	Type     int      `json:"type"`
 	Email    string   `json:"email,omitempty"`
 }
 
 type Identity struct {
-	AccountId string `json:"accountId,omitempty"`
+	AccountId string `json:"accountId"`
 }
 
 type OrderItem struct {
-	Items       []Item `json:"items,omitempty"`
-	CycleType   int    `json:"cycleType,omitempty"`
-	CycleCnt    int    `json:"cycleCnt,omitempty"`
-	InstanceCnt int    `json:"instanceCnt,omitempty"`
+	Items       []Item `json:"items"`
+	CycleType   int    `json:"cycleType"`
+	CycleCnt    int    `json:"cycleCnt"`
+	InstanceCnt int    `json:"instanceCnt"`
 }
 
 type Item struct {
-	ItemConfig   map[string]interface{} `json:"itemConfig,omitempty"`
-	Master       bool                   `json:"master,omitempty"`
-	ResourceType string                 `json:"resourceType,omitempty"`
-	ServiceTag   string                 `json:"serviceTag,omitempty"`
-	ItemValue    int                    `json:"itemValue,omitempty"`
+	ItemConfig   map[string]interface{} `json:"itemConfig"`
+	Master       bool                   `json:"master"`
+	ResourceType string                 `json:"resourceType"`
+	ServiceTag   string                 `json:"serviceTag"`
+	ItemValue    int                    `json:"itemValue"`
 }
 
 func (o *Order) Marshal() string {

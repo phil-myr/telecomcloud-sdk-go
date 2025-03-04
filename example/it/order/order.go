@@ -47,13 +47,16 @@ func main() {
 
 	orderDetail := Order{
 		AutoPay: true,
+		Source:  "8",
 		Orders: []OrderItem{
 			{
-				CycleCnt:    0,
 				CycleType:   101,
 				InstanceCnt: 1,
 				Items: []Item{
 					{
+						Master:       true,
+						ResourceType: "PAAS_ECI",
+						ServiceTag:   "PAAS",
 						ItemConfig: map[string]interface{}{
 							"version":  "v1",
 							"edition":  "basic",
@@ -68,6 +71,7 @@ func main() {
 							"extJson": map[string]interface{}{
 								"busiChannel": "010",
 								"clusterName": "eci-zc11x1tl2g6c46vjrkvepxaiyz",
+								"envTag":      "198dev",
 								"prodId":      "12710101",
 								"attrMap": map[string]string{
 									"cpu":               "1",
@@ -80,37 +84,36 @@ func main() {
 								},
 							},
 						},
-						ItemValue:    2,
-						Master:       true,
-						ResourceType: "PAAS_ECI",
-						ServiceTag:   "PAAS",
+						ItemValue: 1,
 					},
 					{
-						ItemConfig: map[string]interface{}{
-							"Version": "v1",
-							"Type":    "mem",
-						},
-						ItemValue:    2,
 						Master:       false,
 						ResourceType: "PAAS_ECI_BASIC",
 						ServiceTag:   "PAAS",
+						ItemConfig: map[string]interface{}{
+							"version": "v1",
+							"type":    "mem",
+						},
+						ItemValue: 2,
 					},
 					{
-						ItemConfig: map[string]interface{}{
-							"Version": "v1",
-							"Type":    "cpu",
-						},
-						ItemValue:    1,
 						Master:       false,
 						ResourceType: "PAAS_ECI_BASIC",
 						ServiceTag:   "PAAS",
+						ItemConfig: map[string]interface{}{
+							"version": "v1",
+							"type":    "cpu",
+						},
+						ItemValue: 1,
 					},
 				},
 			},
 		},
 		CustomInfo: CustomInfo{
-			Email:    "",
-			Identity: Identity{AccountId: "8aee44f097114efaaead22acf2ed4194"},
+			Type: 2,
+			Identity: Identity{
+				AccountId: "",
+			},
 		},
 	}
 
