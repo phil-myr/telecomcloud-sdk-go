@@ -67,20 +67,20 @@ func main() {
 									"azName": "cn-xinan1-1A",
 								},
 							},
-							"name": "eci-zc11x1tl2g6c46vjrkvepxaiyz",
+							"name": "eci-oniy5pupj7urjqnx",
 							"extJson": map[string]interface{}{
 								"busiChannel": "010",
-								"clusterName": "eci-zc11x1tl2g6c46vjrkvepxaiyz",
+								"clusterName": "eci-oniy5pupj7urjqnx",
 								"envTag":      "198dev",
 								"prodId":      "12710101",
 								"attrMap": map[string]string{
 									"cpu":               "1",
-									"memory":            "2",
+									"memory":            "1",
 									"restartPolicy":     "Always",
 									"instancePayAmount": "1",
-									"vpcUuid":           "vpc-gbji827p0c",
-									"subnetUuid":        "subnet-de0fpe2yab",
-									"securityGroupUuid": "sg-lqmyzwighs",
+									"vpcUuid":           "vpc-k1w1mwfxli",
+									"subnetUuid":        "subnet-n4wenbqywe",
+									"securityGroupUuid": "sg-x2cc0bc9ey",
 								},
 							},
 						},
@@ -88,21 +88,13 @@ func main() {
 					},
 					{
 						Master:       false,
-						ResourceType: "PAAS_ECI_BASIC",
+						ResourceType: "PAAS_ECI_PREMIUM",
 						ServiceTag:   "PAAS",
 						ItemConfig: map[string]interface{}{
-							"version": "v1",
-							"type":    "mem",
-						},
-						ItemValue: 2,
-					},
-					{
-						Master:       false,
-						ResourceType: "PAAS_ECI_BASIC",
-						ServiceTag:   "PAAS",
-						ItemConfig: map[string]interface{}{
-							"version": "v1",
-							"type":    "cpu",
+							"version":  "v1",
+							"cpuNum":   "1",
+							"memSize":  "1",
+							"hostType": "s7",
 						},
 						ItemValue: 1,
 					},
@@ -112,7 +104,7 @@ func main() {
 		CustomInfo: CustomInfo{
 			Type: 2,
 			Identity: Identity{
-				AccountId: "",
+				AccountId: "a3f2b12f917d4ea3afa6e3c7e9553694",
 			},
 		},
 	}

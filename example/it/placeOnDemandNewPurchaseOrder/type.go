@@ -6,7 +6,7 @@ type Order struct {
 	AutoPay    bool        `json:"autoPay"`
 	Source     string      `json:"source"`
 	Orders     []OrderItem `json:"orders"`
-	CustomInfo CustomInfo  `json:"customerId"`
+	CustomInfo CustomInfo  `json:"customerInfo"`
 }
 
 type CustomInfo struct {
