@@ -321,10 +321,13 @@ func (s *containerGroupClient) ExecCommand(ctx context.Context, req *containergr
 	openapiResp.ReturnObj = &resp
 	ret, err := s.client.R().
 		SetContext(ctx).
+		AddHeaders(map[string]string{
+			"regionId": req.GetRegionId(),
+		}).
 		SetBodyParam(req).
 		SetRequestOption(reqOpt...).
 		SetResult(openapiResp).
-		Execute(http.MethodGet, "/eci/api/v1/containers/execContainerCommand/:containerGroupId")
+		Execute(http.MethodPost, "/eci/api/v1/containers/execContainerCommand")
 	if err != nil {
 		return nil, nil, err
 	}

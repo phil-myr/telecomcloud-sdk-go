@@ -3,7 +3,7 @@ module github.com/telecom-cloud/telecomcloud-sdk-go
 go 1.22.10
 
 require (
-	github.com/telecom-cloud/client-go v0.1.0
+	github.com/telecom-cloud/client-go v0.1.1
 	google.golang.org/protobuf v1.36.2
 )
 
@@ -15,6 +15,7 @@ require (
 	github.com/cloudwego/iasm v0.2.0 // indirect
 	github.com/cloudwego/netpoll v0.6.5 // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
+	github.com/gorilla/websocket v1.5.3 // indirect
 	github.com/klauspost/cpuid/v2 v2.0.9 // indirect
 	github.com/nyaruka/phonenumbers v1.4.4 // indirect
 	github.com/tidwall/gjson v1.18.0 // indirect
