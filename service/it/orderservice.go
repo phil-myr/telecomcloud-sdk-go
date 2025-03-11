@@ -38,6 +38,8 @@ type OrderClient interface {
 	PlaceRefundOrder(context context.Context, req *order.PlaceRefundOrderRequest, reqOpt ...config.RequestOption) (resp *order.PlaceRefundOrderResponse, rawResponse *protocol.Response, err error)
 
 	QueryResourceInfoByMasterOrderId(context context.Context, req *order.QueryResourceInfoByMasterOrderIdRequest, reqOpt ...config.RequestOption) (resp *order.QueryResourceInfoByMasterOrderIdResponse, rawResponse *protocol.Response, err error)
+
+	QueryOrderDetail(context context.Context, req *order.QueryOrderDetailRequest, reqOpt ...config.RequestOption) (resp *order.QueryOrderDetailResponse, rawResponse *protocol.Response, err error)
 }
 
 type orderClient struct {
@@ -118,6 +120,26 @@ func (s *orderClient) QueryResourceInfoByMasterOrderId(ctx context.Context, req 
 	return resp, rawResponse, nil
 }
 
+func (s *orderClient) QueryOrderDetail(ctx context.Context, req *order.QueryOrderDetailRequest, reqOpt ...config.RequestOption) (resp *order.QueryOrderDetailResponse, rawResponse *protocol.Response, err error) {
+	openapiResp := &openapi.OpenapiResponse{}
+	openapiResp.ReturnObj = &resp
+	ret, err := s.client.R().
+		SetContext(ctx).
+		AddHeaders(map[string]string{
+			"masterOrderId": req.GetMasterOrderId(),
+		}).
+		SetBodyParam(req).
+		SetRequestOption(reqOpt...).
+		SetResult(openapiResp).
+		Execute(http.MethodGet, "/v3/order/queryOrderDetail")
+	if err != nil {
+		return nil, nil, err
+	}
+
+	rawResponse = ret.RawResponse
+	return resp, rawResponse, nil
+}
+
 var defaultOrderClient, _ = NewOrderClient(baseDomain)
 
 func ConfigDefaultOrderClient(ops ...Option) (err error) {
@@ -135,4 +157,8 @@ func PlaceRefundOrder(context context.Context, req *order.PlaceRefundOrderReques
 
 func QueryResourceInfoByMasterOrderId(context context.Context, req *order.QueryResourceInfoByMasterOrderIdRequest, reqOpt ...config.RequestOption) (resp *order.QueryResourceInfoByMasterOrderIdResponse, rawResponse *protocol.Response, err error) {
 	return defaultOrderClient.QueryResourceInfoByMasterOrderId(context, req, reqOpt...)
+}
+
+func QueryOrderDetail(context context.Context, req *order.QueryOrderDetailRequest, reqOpt ...config.RequestOption) (resp *order.QueryOrderDetailResponse, rawResponse *protocol.Response, err error) {
+	return defaultOrderClient.QueryOrderDetail(context, req, reqOpt...)
 }
