@@ -96,6 +96,7 @@ func execContainerWebsocket(requestId string, url string) error {
 	cmd := containergroup.ExecMessage{
 		Command: "ls\r\n",
 	}
+
 	cmdbytes, _ := json.Marshal(cmd)
 	err = wsconn.WriteMessage(websocket.TextMessage, cmdbytes)
 	if err != nil {

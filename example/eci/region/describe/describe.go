@@ -5,17 +5,15 @@ import (
 	"fmt"
 	"os"
 
-	cli "github.com/telecom-cloud/client-go/pkg/client"
 	"github.com/telecom-cloud/client-go/pkg/openapi/config"
-	"github.com/telecom-cloud/client-go/pkg/protocol"
 	"github.com/telecom-cloud/telecomcloud-sdk-go/service/eci"
 	"github.com/telecom-cloud/telecomcloud-sdk-go/service/eci/types/region"
 )
 
 var (
-	accessKey  = ""
-	secretKey  = ""
-	baseDomain = "https://eci-global.ctapi.ctyun.cn"
+	accessKey  = "b1accda96cb74be390009d2144923466"
+	secretKey  = "64caa9d195f14f5da3e973f7d076b6e3"
+	baseDomain = "https://eci-global.ctapi-test.ctyun.cn:21443"
 )
 
 func init() {
@@ -53,35 +51,4 @@ func main() {
 	}
 
 	fmt.Printf("raw: %v\nresp: %v\n", string(raw.Body()), resp)
-}
-
-var (
-	beforeMW0 = "BeforeMiddleware0"
-	afterMW0  = "AfterMiddleware0"
-	beforeMW1 = "BeforeMiddleware1"
-	afterMW1  = "AfterMiddleware1"
-)
-
-func mockMW0(next cli.Endpoint) cli.Endpoint {
-	return func(ctx context.Context, req *protocol.Request, resp *protocol.Response) (err error) {
-		req.BodyBuffer().WriteString(beforeMW0)
-		err = next(ctx, req, resp)
-		if err != nil {
-			return err
-		}
-		req.BodyBuffer().WriteString(afterMW0)
-		return nil
-	}
-}
-
-func mockMW1(next cli.Endpoint) cli.Endpoint {
-	return func(ctx context.Context, req *protocol.Request, resp *protocol.Response) (err error) {
-		req.BodyBuffer().WriteString(beforeMW1)
-		err = next(ctx, req, resp)
-		if err != nil {
-			return err
-		}
-		req.BodyBuffer().WriteString(afterMW1)
-		return nil
-	}
 }
